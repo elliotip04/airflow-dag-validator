@@ -34,6 +34,9 @@ By default, use these credentials:
 
 The DAG validator is a python file that run pytest to identify unexpected orphaned airflow tasks with no/unexpected upstream and downstream dependencies. This ensures the correctness of the airflow DAGs such that the orchestrated data pipeline behaves as expected. The validation process leverages airflow DAG dependencies, expressed as relationships like `task1 >> task2`, to identify unexpected orphaned tasks with no/unexpected upstream and downstream dependencies.
 
+
+![alt text](https://github.com/elliotip04/airflow-dag-validator/blob/feature/image/Airflow_DAG_Validator.jpg)
+
 ## Running tests
 To execute the DAG validation tests, use the following command:<br>
 ```
