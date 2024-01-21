@@ -43,7 +43,7 @@ pytest -s tests/test_dag_output.py
 The pytest suite comprises two individual tests, each addressing specific aspects of DAG validation:
 
 1. Find Orphaned Models with No Upstream Tasks (All layers: i.e. staging_to_source, landing-to-staging)
-2. Find Incorrectly Mapped Upstream Layers (AAll layers: i.e. staging_to_source, landing-to-staging)
+2. Find Incorrectly Mapped Upstream Layers (All layers: i.e. staging_to_source, landing-to-staging)
 
 You can modify or add tests as needed to enhance the DAG validation process.
 
