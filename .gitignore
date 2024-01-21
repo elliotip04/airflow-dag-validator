@@ -1,8 +1,9 @@
-**/**/__pycache__
-
+# .gitignore
+**/__pycache__
 venv
 .coverage
 .idea/
-logs/
-
 .DS_Store
+
+# Exclude logs directory
+logs/

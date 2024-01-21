@@ -10,20 +10,11 @@ def airflow_dag_validator():
 @pytest.fixture
 def expected_orphaned_all_models_with_no_upstream():
     return {
-        # "vault_to_curated": {
-        #     "Alliant_master_dag_distribution.py": [
-        #         "vault_raw_date_reference_s",
-        #         "vault_raw_date_h",
-        #     ],
-        #     "Alliant_master_dag_initialise.py": [
-        #         "vault_raw_date_reference_s",
-        #         "vault_raw_date_h",
-        #     ],
-        #     "Alliant_master_dag_non_distribution.py": [
-        #         "vault_raw_date_reference_s",
-        #         "vault_raw_date_h",
-        #     ],
-        # },
+        # Specify expected layers and tasks with no upstream tasks
+        # e.g. "staging_to_source": {
+        #           "example_dag.py": [
+        #               "staging_task_with_no_upstream",
+        #           },
     }
 
 

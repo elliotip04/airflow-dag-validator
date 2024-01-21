@@ -23,6 +23,7 @@ x-airflow-common:
     - ${AIRFLOW_LOGS}:/opt/airflow/logs
     - ${AIRFLOW_PLUGINS}:/opt/airflow/plugins
     - ${AIRFLOW_SECRETS}:/opt/secrets
+
   networks:
     - airflow
   user: "${AIRFLOW_UID:-50000}:0"
@@ -143,6 +144,7 @@ services:
         fi
         mkdir -p /sources/logs /sources/dags /sources/plugins
         chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
+
         exec /entrypoint airflow version
     # yamllint enable rule:line-length
     environment:

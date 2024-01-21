@@ -205,11 +205,7 @@ class AirflowDAGValidation:
 
                 model_upstream_parts = model_upstream.split("_")
 
-                next_from_layer = (
-                    model_upstream_parts[0]
-                    if model_upstream_parts[0] != "trns"
-                    else "_".join(model_upstream_parts[:2])
-                )
+                next_from_layer = "_".join(model_upstream_parts[:2])
 
                 self._recursive_result_processing(
                     base_model,
@@ -396,54 +392,3 @@ class AirflowDAGValidation:
         print(f"*** Orphaned Models found in {dag}: {result}")
 
         return result, layer_dependencies
-
-    def _generate_pairs(
-        self,
-        layer_dependencies: Dict[str, Dict[str, Dict[str, str]]],
-        key_type: str,
-    ) -> List:
-        return (
-            (dag, key1, key2)
-            for dag, dag_dependencies in layer_dependencies.get(key_type, {}).items()
-            for key1, keys2 in dag_dependencies.items()
-            for key2 in keys2
-        )
-
-    def _curated_raw_pairs_generator(
-        self, layer_dependencies: Dict[str, Dict[str, Dict[str, str]]]
-    ) -> List:
-        return self._generate_pairs(layer_dependencies, "curated_to_raw")
-
-    def _raw_glue_pairs_generator(
-        self, layer_dependencies: Dict[str, Dict[str, Dict[str, str]]]
-    ) -> List:
-        return self._generate_pairs(layer_dependencies, "raw_to_glue")
-
-    def _find_unmatched_models(
-        self,
-        dag: str,
-        key1: str,
-        key2: str,
-        split_key1: str,
-        split_key2: str,
-        expected_non_matching_models: Dict[
-            str, Union[Dict[str, List[str]], Optional[str]]
-        ],
-    ) -> str:
-        result = "Match found" if split_key1 in split_key2 else "No match"
-
-        # Check against the expected non-matching pairs only when there is no match
-        if result == "No match":
-            expected_non_matching = expected_non_matching_models.get(dag, {}).get(
-                key1, []
-            )
-            assert (
-                key2 in expected_non_matching
-            ), f"Assertion failed: {key2} and {key1} is not a correct match"
-
-            result = "Match found" if key2 in expected_non_matching else "No match"
-        return result
-
-# test = AirflowDAGValidation("dags/")
-# print(test._extract_landing_dependencies(test.filter_dag_dependencies_from_file("dags/example_dag.py")))
-# test.process_dag_folder()
