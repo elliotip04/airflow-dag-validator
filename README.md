@@ -30,14 +30,6 @@ By default, use these credentials:
 - user: airflow
 - pass: airflow
 
-## Install dependencies
-
-You can add your custom dependencies in the requirements.txt, and install with the following command:
-
-```bash
-pip install -r requirements.txt
-```
-
 # DAG Validator
 
 The DAG validator is a python file that run pytest to identify unexpected orphaned airflow tasks with no/unexpected upstream and downstream dependencies. This ensures the correctness of the airflow DAGs such that the orchestrated data pipeline behaves as expected. The validation process leverages airflow DAG dependencies, expressed as relationships like `task1 >> task2`, to identify unexpected orphaned tasks with no/unexpected upstream and downstream dependencies.
@@ -54,3 +46,15 @@ The pytest suite comprises two individual tests, each addressing specific aspect
 2. Find Incorrectly Mapped Upstream Layers (AAll layers: i.e. staging_to_source, landing-to-staging)
 
 You can modify or add tests as needed to enhance the DAG validation process.
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+- **Python:** This project requires Python. If you haven't installed it yet, you can download it from [python.org](https://www.python.org/downloads/) or use your system's package manager.
+
+## Installation
+
+You can install the project dependencies by running the following command:
+
+```bash
+pip install -r requirements.txt
